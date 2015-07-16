@@ -113,25 +113,55 @@ public class LinkedListDouble {
 	 */
 	public double middle() {
 		
-		  Node current = head;
-	      int length = 0;
-	      Node middle = head;
-	   
-	      while(current.getNextNode() != null){
-	          length++;
-	          if(length % 2 ==0){
-	              middle = middle.getNextNode();
-	          }
-	          current = current.getNextNode();
-	      }
-	    
-	      if(length % 2 == 1){
-	          middle = middle.getNextNode();
-	      }	
-	      
-	      return middle.value;
+		Node last = head.getNextNode();
+		Node middle = head;
+
+		while (last.getNextNode() != null) {
+			if (last.getNextNode().getNextNode() != null) {
+				middle = middle.getNextNode();
+				last = last.getNextNode().getNextNode();
+			} else {
+				middle = middle.getNextNode();
+				last = last.getNextNode();
+			}
+		}
+		return middle.getValue();
+	}
+	
+	/**
+	 * Returns the first element in the list
+	 * @return
+	 */
+	public Double getFirst() {
+		if (head == null) {
+			return null;
+		} else {
+			return head.getValue();
+		}
+	}
+	
+	/**
+	 * Returns the last element in the list
+	 * @return
+	 */
+	public Double getLast() {
+		return getLastNode().getValue();
+	}
+	
+	/**
+	 * Deletes the first element in the list.
+	 */
+	public void deleteFirst() {
+		remove(0);
 	}
 
+	/**
+	 * Deletes the last element in the list.
+	 */
+	public void deleteLast() {
+		remove(size() - 1);
+	}
+	
 	/**
 	 * Prints out value of the head node
 	 */
