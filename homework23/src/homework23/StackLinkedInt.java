@@ -1,19 +1,37 @@
 package homework23;
 
+/**
+ * Represents an implementation of stack of integers, using arrays.
+ * 
+ * @author ajla.eltabari
+ *
+ */
 import java.util.EmptyStackException;
 
 public class StackLinkedInt {
-
 	private Node head;
 
+	/**
+	 * Empty constructor.
+	 * Initialize head node to null.
+	 */
 	public StackLinkedInt() {
 		head = null;
 	}
 
+	/**
+	 * Checks if stack is empty.
+	 * @returns true if it is, and false if it is not.
+	 */
 	public boolean empty() {
 		return head == null;
 	}
 
+	/**
+	 * Adds element at the end of the stack.
+	 * @param value
+	 * @return
+	 */
 	public int push(int value) {
 		if (head == null) {
 			head = new Node(value);
@@ -25,10 +43,18 @@ public class StackLinkedInt {
 		return value;
 	}
 	
+	/**
+	 * Returns last added element from the stack.
+	 * Does'n do anything with that element.
+	 */
 	public int peek() {
 		return head.getValue();
 	}
 	
+	/**
+	 * Removes last added element from the stack.
+	 * @return
+	 */
 	public int pop()	 {
 		if(head == null){
 			throw new EmptyStackException();
@@ -39,6 +65,9 @@ public class StackLinkedInt {
 		return tmp;
 	}
 	
+	/**
+	 * Prints out information about stack elements.
+	 */
 	public String toString() {
 		if(head == null) {
 			return "Stack is empty!";
@@ -47,6 +76,12 @@ public class StackLinkedInt {
 		}
 	}
 
+	/**
+	 * Inner class that represents node of linked list.
+	 * Node contains integer value and pointer the next node.
+	 * @author ajla.eltabari
+	 *
+	 */
 	private class Node {
 
 		private int value;
