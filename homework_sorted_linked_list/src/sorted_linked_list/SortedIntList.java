@@ -54,7 +54,7 @@ public class SortedIntList {
 	}
 
 	private int getLength(Node node) {
-		return (node.getNext() == null) ? 1 : getLength(node.getNext());
+		return (node.getNext() == null) ? 1 : getLength(node.getNext()) + 1;
 	}
 
 	/**
