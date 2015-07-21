@@ -29,12 +29,12 @@ public class MyMap {
 	 */
 	public static Map<Integer, ArrayList<Integer>> getMap(int key, int numbersLimit){
 		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
-		for (int i = 1; i < key + 1; i++) {
+		for (int k = 1; k <= key; k++) {
 			ArrayList<Integer> list = new ArrayList<>();
 			for (int j = 0; j < numbersLimit; j++) {
-				list.add(i * j + 1);
+				list.add(k * j + 1);
 			}
-			map.put(i, list);
+			map.put(k, list);
 		}
 		return map;
 	}
