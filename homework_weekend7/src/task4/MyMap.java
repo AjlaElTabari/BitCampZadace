@@ -27,7 +27,7 @@ public class MyMap {
 	 * @param numbersLimit
 	 * @return
 	 */
-	public static Map<Integer, ArrayList<Integer>> getMap(int key, int numbersLimit){
+	public static Map<Integer, ArrayList<Integer>> getMap(int key, int numbersLimit) {
 		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
 		for (int k = 1; k <= key; k++) {
 			ArrayList<Integer> list = new ArrayList<>();
@@ -38,4 +38,4 @@ public class MyMap {
 		}
 		return map;
 	}
-}
+} // limenska orkestra
