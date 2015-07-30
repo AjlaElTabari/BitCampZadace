@@ -112,7 +112,7 @@ public class Server extends JFrame {
 			String line = "";
 
 			while (true) {
-				line = "Client: " + reader.readLine();
+				line = "Ajla: " + reader.readLine();
 				if (line.split(" ")[0].equals("/open")) {
 					String address = line.split(" ")[1];
 					File file = new File(address);
