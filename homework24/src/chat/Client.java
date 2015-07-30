@@ -108,7 +108,7 @@ public class Client extends JFrame {
 			String message = "";
 
 			while (true) {
-				message = "Server: " + reader.readLine();
+				message = "Somebody else: " + reader.readLine();
 				BufferedWriter writer = new BufferedWriter(
 						new OutputStreamWriter(client.getOutputStream()));
 

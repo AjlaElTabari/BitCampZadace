@@ -109,7 +109,7 @@ public class Server extends JFrame {
 			String message = "";
 
 			while (true) {
-				message = "Client: " + reader.readLine();
+				message = "Ajla: " + reader.readLine();
 
 				BufferedWriter writer = new BufferedWriter(
 						new OutputStreamWriter(socket.getOutputStream()));
