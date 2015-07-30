@@ -21,13 +21,14 @@ import javax.swing.JTextField;
 
 /**
  * Represents a chat window from the server
+ * 
  * @author ajla
  *
  */
 public class Server extends JFrame {
 
 	private static final long serialVersionUID = 4614283558237688331L;
-	
+
 	private Socket socket;
 	private ServerSocket server;
 
@@ -36,12 +37,12 @@ public class Server extends JFrame {
 	private JPanel pnlMsg = new JPanel();
 	private JTextArea taChatHistory = new JTextArea();
 	private JTextField txtMsg = new JTextField();
-	
+
 	private JScrollPane scroll = new JScrollPane(taChatHistory);
 
 	/**
-	 * Constructor of server that enables server to receive and send message to
-	 * the client.
+	 * Constructor 
+	 * Allows server to receive and send message to the client.
 	 */
 	public Server() {
 		pnlMainPanel.setLayout(new BorderLayout());
@@ -69,7 +70,7 @@ public class Server extends JFrame {
 						writer.write(txtMsg.getText());
 						writer.newLine();
 						writer.flush();
-						
+
 						taChatHistory.append("Ajla: " + txtMsg.getText() + "\n");
 						txtMsg.setText("");
 					} catch (IOException e1) {
@@ -77,7 +78,7 @@ public class Server extends JFrame {
 					}
 				}
 			}
-			
+
 		});
 		taChatHistory.setFont(new Font("Monospace", Font.BOLD, 14));
 
@@ -96,8 +97,7 @@ public class Server extends JFrame {
 	}
 
 	/**
-	 * Creates server socket and enables server to receive messages from
-	 * clients.
+	 * Connects client and server and allows excangeing messages
 	 */
 	public void runServer() {
 		try {
@@ -106,18 +106,18 @@ public class Server extends JFrame {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
 					socket.getInputStream()));
 			// client.
-			String areaText = "";
+			String message = "";
 
 			while (true) {
-				areaText = "Client: " + reader.readLine();
-				
-					BufferedWriter writer = new BufferedWriter(
-							new OutputStreamWriter(socket.getOutputStream()));
+				message = "Client: " + reader.readLine();
 
-					writer.write(txtMsg.getText());
-					writer.newLine();
-					writer.flush();
-				} 
+				BufferedWriter writer = new BufferedWriter(
+						new OutputStreamWriter(socket.getOutputStream()));
+
+				writer.write(message);
+				writer.newLine();
+				writer.flush();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
