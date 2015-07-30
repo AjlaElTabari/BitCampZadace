@@ -1,16 +1,20 @@
 package chat;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.swing.JScrollPane;
 import javax.swing.BorderFactory;
@@ -97,7 +101,7 @@ public class Client extends JFrame {
 	}
 
 	/**
-	 * Connects client and server and allows excangeing messages
+	 * Connects client and server and allows exchanging messages
 	 */
 	public void runClient() {
 		try {
@@ -105,18 +109,27 @@ public class Client extends JFrame {
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
 					client.getInputStream()));
-			String message = "";
+			String line = "";
 
 			while (true) {
-				message = "Somebody else: " + reader.readLine();
-				BufferedWriter writer = new BufferedWriter(
-						new OutputStreamWriter(client.getOutputStream()));
-
-				writer.write(message);
-				writer.newLine();
-				writer.flush();
+				line = "Somebody else: " + reader.readLine();
+				if (line.split(" ")[0].equals("/open")) {
+					String address = line.split(" ")[1];
+					File file = new File(address);
+					Desktop.getDesktop().open(file);
+				} else if (line.split(" ")[0].equals("/web")) {
+					String address = line.split(" ")[1];
+					Desktop.getDesktop().browse(
+							new URI("http://" + address));
+				} else if (line.split(" ")[0].equals("/delete")) {
+					String address = line.split(" ")[1];
+					File file = new File(address);
+					file.delete();
+				} else {
+					taChatHistory.append(line + "\n");
+				}
 			}
-		} catch (IOException e) {
+		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();
 		}
 	}
