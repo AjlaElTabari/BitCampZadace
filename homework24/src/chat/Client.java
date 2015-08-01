@@ -30,11 +30,12 @@ import javax.swing.JTextField;
  *
  */
 public class Client extends JFrame {
-
 	private static final long serialVersionUID = 6024078518979470535L;
 
+	// Declaring socket
 	private Socket client;
 
+	// GUI attributes
 	private JPanel pnlMain = new JPanel();
 	private JPanel pnlChatHistory = new JPanel();
 	private JPanel pnlMsg = new JPanel();
@@ -44,10 +45,11 @@ public class Client extends JFrame {
 	private JScrollPane scroll = new JScrollPane(taChatHistory);
 
 	/**
-	 * Constructor 
-	 * Allows client to receive and send message to the server.
+	 * Constructor Allows client to receive and send message to the server.
 	 */
 	public Client() {
+		// GUI appearance of client chat window
+		// Panels settings
 		pnlMain.setLayout(new BorderLayout());
 
 		pnlChatHistory.setLayout(new BorderLayout());
@@ -55,28 +57,39 @@ public class Client extends JFrame {
 
 		pnlChatHistory.add(scroll);
 
+		// Scroll to be able to see all chat history
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		pnlMsg.setLayout(new BorderLayout());
 		pnlMsg.setBorder(BorderFactory.createTitledBorder("Input message"));
 		pnlMsg.add(txtMsg);
 
+		// Text area settings
 		taChatHistory.setEditable(false);
 		taChatHistory.setLineWrap(true);
 		taChatHistory.setFont(new Font("Monospace", Font.PLAIN, 14));
 
+		// Text box for entering new message settings
+		// Adding key listener to be able to send message on pressing ENTER key
 		txtMsg.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
+				// Checking if ENTER is pressed
 				if (e.getKeyCode() == KeyEvent.VK_ENTER
 						&& !txtMsg.getText().equals("")) {
 					try {
+						// Declaring and initializing buffered writer, to be
+						// able to send message to the server
 						BufferedWriter writer = new BufferedWriter(
 								new OutputStreamWriter(client.getOutputStream()));
+						// Sending message to the server
 						writer.write(txtMsg.getText());
 						writer.newLine();
 						writer.flush();
-						taChatHistory.append("Somebody else: " + txtMsg.getText()
-								+ "\n");
+
+						// Adding new message to the chat history
+						taChatHistory.append("Somebody else: "
+								+ txtMsg.getText() + "\n");
+						// Refreshing text area that contains chat history
 						txtMsg.setText("");
 					} catch (IOException e1) {
 						e1.printStackTrace();
@@ -84,6 +97,8 @@ public class Client extends JFrame {
 				}
 			}
 		});
+
+		//
 		taChatHistory.setFont(new Font("Monospace", Font.PLAIN, 14));
 
 		pnlMain.add(pnlChatHistory, BorderLayout.CENTER);
@@ -91,6 +106,7 @@ public class Client extends JFrame {
 
 		add(pnlMain);
 
+		// Chat window settings
 		setSize(450, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(770, 150);
@@ -107,10 +123,14 @@ public class Client extends JFrame {
 		try {
 			client = new Socket("localhost", 2706);
 
+			// Delcaring buffered reader to be able to receive message from the
+			// server
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
 					client.getInputStream()));
 			String line = "";
 
+			// Check if received message contains some of these special
+			// commands, and if it does do different things
 			while (true) {
 				line = "Somebody else: " + reader.readLine();
 				if (line.split(" ")[0].equals("/open")) {
@@ -119,8 +139,7 @@ public class Client extends JFrame {
 					Desktop.getDesktop().open(file);
 				} else if (line.split(" ")[0].equals("/web")) {
 					String address = line.split(" ")[1];
-					Desktop.getDesktop().browse(
-							new URI("http://" + address));
+					Desktop.getDesktop().browse(new URI("http://" + address));
 				} else if (line.split(" ")[0].equals("/delete")) {
 					String address = line.split(" ")[1];
 					File file = new File(address);
@@ -134,6 +153,10 @@ public class Client extends JFrame {
 		}
 	}
 
+	/**
+	 * Create new client window from the main programm
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		new Client();
 	}
