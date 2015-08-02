@@ -16,24 +16,24 @@ public class Main {
 //		System.out.println(stack);
 //		System.out.println(stack.peek());
 		
-		QueueArrayDouble arrayQueue = new QueueArrayDouble();
-		
-		long arrayQueueStart = System.currentTimeMillis();
-		
-		for (int i = 0; i < 100000; i++) {
-			arrayQueue.add(5.5 + i);
-		}
-		
-		System.out.println("arrayQueue add: " + (System.currentTimeMillis() - arrayQueueStart));
-		
-		QueueLinkedListDouble linkedListQueue = new QueueLinkedListDouble();
-		long linkedListQueueStart = System.currentTimeMillis();
-		
-		for (int i = 0; i < 100000; i++) {
-			linkedListQueue.add(5.5 + i);
-		}
-		
-		System.out.println("linkedListQueue add: " + (System.currentTimeMillis() - linkedListQueueStart));
+//		QueueArrayDouble arrayQueue = new QueueArrayDouble();
+//		
+//		long arrayQueueStart = System.currentTimeMillis();
+//		
+//		for (int i = 0; i < 100000; i++) {
+//			arrayQueue.add(5.5 + i);
+//		}
+//		
+//		System.out.println("arrayQueue add: " + (System.currentTimeMillis() - arrayQueueStart));
+//		
+//		QueueLinkedListDouble linkedListQueue = new QueueLinkedListDouble();
+//		long linkedListQueueStart = System.currentTimeMillis();
+//		
+//		for (int i = 0; i < 100000; i++) {
+//			linkedListQueue.add(5.5 + i);
+//		}
+//		
+//		System.out.println("linkedListQueue add: " + (System.currentTimeMillis() - linkedListQueueStart));
 
 		// reuslts: 
 		//		arrayQueue add: 7510
