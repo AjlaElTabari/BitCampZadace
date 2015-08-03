@@ -36,7 +36,7 @@ public class NormalServer {
 			// Splitting received string into parts, web site name and location
 			String[] parts = reader.readLine().split(" ");
 
-			// Checking if received web location is valid web addresss
+			// Checking if received web location is valid web address
 			if (validateURL(parts[1])) {
 				writer.write(parts[0] + " " + parts[1]);
 				writer.newLine();
