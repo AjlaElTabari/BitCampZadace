@@ -48,6 +48,7 @@ public class Task2 extends JFrame {
 			imgToRender = ImageIO
 					.read(new File("src/task2/MyBelovedLondon.JPG"));
 		} catch (IOException e) {
+			System.out.println("Desired picture couldn't be loaded.");
 			e.printStackTrace();
 		}
 
@@ -83,6 +84,7 @@ public class Task2 extends JFrame {
 			try {
 				producers.get(i).join();
 			} catch (InterruptedException e) {
+				System.out.println("Thread couldn't be joined.");
 				e.printStackTrace();
 			}
 		}
@@ -105,6 +107,7 @@ public class Task2 extends JFrame {
 				try {
 					consumers.take().run();
 				} catch (InterruptedException e) {
+					System.out.println("Consumer couldn't be taken.");
 					e.printStackTrace();
 				}
 			}
