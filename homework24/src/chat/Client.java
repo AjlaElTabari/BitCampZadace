@@ -5,7 +5,6 @@ import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,10 +15,11 @@ import java.net.Socket;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import javax.swing.JScrollPane;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -87,11 +87,12 @@ public class Client extends JFrame {
 						writer.flush();
 
 						// Adding new message to the chat history
-						taChatHistory.append("Somebody else: "
+						taChatHistory.append("Somebody: "
 								+ txtMsg.getText() + "\n");
 						// Refreshing text area that contains chat history
 						txtMsg.setText("");
 					} catch (IOException e1) {
+						JOptionPane.showMessageDialog(null,"Message couldn't be sent.");
 						e1.printStackTrace();
 					}
 				}
@@ -132,16 +133,16 @@ public class Client extends JFrame {
 			// Check if received message contains some of these special
 			// commands, and if it does do different things
 			while (true) {
-				line = "Somebody else: " + reader.readLine();
-				if (line.split(" ")[0].equals("/open")) {
-					String address = line.split(" ")[1];
+				line = "Ajla: " + reader.readLine();
+				if (line.split(" ")[1].equals("/open")) {
+					String address = line.split(" ")[2];
 					File file = new File(address);
 					Desktop.getDesktop().open(file);
-				} else if (line.split(" ")[0].equals("/web")) {
-					String address = line.split(" ")[1];
+				} else if (line.split(" ")[1].equals("/web")) {
+					String address = line.split(" ")[2];
 					Desktop.getDesktop().browse(new URI("http://" + address));
-				} else if (line.split(" ")[0].equals("/delete")) {
-					String address = line.split(" ")[1];
+				} else if (line.split(" ")[1].equals("/delete")) {
+					String address = line.split(" ")[2];
 					File file = new File(address);
 					file.delete();
 				} else {
