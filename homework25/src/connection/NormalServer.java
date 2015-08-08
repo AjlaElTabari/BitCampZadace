@@ -33,15 +33,24 @@ public class NormalServer {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(
 					"src/links.txt", true));
 
+			String line = reader.readLine();
+			String[] parts = null;
+			
 			// Splitting received string into parts, web site name and location
-			String[] parts = reader.readLine().split(" ");
-
-			// Checking if received web location is valid web address
-			if (validateURL(parts[1])) {
-				writer.write(parts[0] + " " + parts[1]);
-				writer.newLine();
-				writer.flush();
+			if(line != null && line.split(" ").length == 2) {
+				parts = line.split(" ");	
+				
+				// Checking if received web location is valid web address
+				if (validateURL(parts[1])) {
+					writer.write(parts[0] + " " + parts[1]);
+					writer.newLine();
+					writer.flush();
+					System.out.println("Validation successful. Link has been added to the file.");
+				}
+			} else {
+				System.out.println("Wrong input.");
 			}
+			
 			client.close();
 			server.close();
 		} catch (IOException e) {
