@@ -15,12 +15,15 @@
 	height: 600px;
 }
 
+
 .div-meet-me {
 	float: right;
 	width: 150px;
 	height: 175px;
 	background-image: url("images/meetMe.png");
-	margin: 100px 100px 0px 0;
+	bottom: 10px;
+	right: 40px;
+	position: relative;
 
 }
 
@@ -51,7 +54,7 @@
 }
 
 .div-table {
-	width: 500px;
+	width: 50%;
 	color: white;
 	float: left;
 	margin-top: 50px;
@@ -63,17 +66,27 @@
 	height: 1200px;
 }
 
+.div-content-gallery {
+	margin: 0 auto;
+	width: 70%;
+	height: 1800px;
+}
+
 .profile-pic {
 	float: left;
 	margin-top: 50px;
+	margin-left: 50px;
 }
 
 .gallery {
-	margin: 100px 0 0 50px;
+	margin-top: 200px;
+	margin-left: 150px;
+	float: left;
 }
 
 .videos {
-	margin: 100px 0 0 100px; 
+	margin-top: -120px;
+	float: left;
 }
 
 .p-style {
@@ -85,12 +98,26 @@
 }
 
 .interests {
-	margin-top: 150px;
+	margin-top: 100px;
 	width: 500px;
 	float: left;
+	margin-left: 50px;
 }
 
 .yt {
 	float: left;
 	margin: 30px 0 0 85px;
+}
+
+.div-image {
+	margin-top: 30px;
+	margin-left: 60px;
+	float: left;	
+	height: 300px;
+	width: 300px;
+}
+
+.img {
+	height: 300px;
+	width: 300px;
 }

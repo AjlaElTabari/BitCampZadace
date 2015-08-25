@@ -15,6 +15,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
+/**
+ * Represents a form that displays all stored complaints as a list.
+ * 
+ * @author ajla
+ *
+ */
 public class GUI_ComplaintsList extends JFrame {
 	private static final long serialVersionUID = 8011891533194721376L;
 	private ArrayList<Complaint> complaints = new ArrayList<>();
@@ -25,40 +31,47 @@ public class GUI_ComplaintsList extends JFrame {
 	private JButton btnOk = new JButton("OK");
 
 	public GUI_ComplaintsList() {
-		
+
+		// Panels settings
 		pnlMain.setLayout(new BorderLayout());
-		pnlMain.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		pnlMain.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		pnlButton.setLayout(new BorderLayout());
-		
+
 		pnlMain.add(lblComplaintList, BorderLayout.NORTH);
 		pnlMain.add(taComplaintList, BorderLayout.CENTER);
 		pnlMain.add(pnlButton, BorderLayout.SOUTH);
 		pnlButton.add(btnOk, BorderLayout.EAST);
-		
+
 		lblComplaintList.setPreferredSize(new Dimension(500, 40));
-		
+
 		taComplaintList.setEditable(false);
-		
+
 		JScrollPane scroll = new JScrollPane(taComplaintList);
-        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        
-        pnlMain.add(scroll);
-		
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+		pnlMain.add(scroll);
+
+		// Calling a method from the DBConnector for selecting all complaints,
+		// and filling an array list.
 		complaints = DBConnector.selectAllComplaints();
-		
-		for(Complaint c : complaints) {
-			taComplaintList.setText(taComplaintList.getText() + "\n" + c.toString());
+
+		// Appending every complaint to the JList area.
+		for (Complaint c : complaints) {
+			taComplaintList.setText(taComplaintList.getText() + "\n"
+					+ c.toString());
 		}
-		
+
+		// On mouse click, form needs to be closed.
 		btnOk.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				setVisible(false);
 			}
-			
+
 		});
-		
+
+		// Main window settings.
 		add(pnlMain);
 		setTitle("Add complaint");
 		setSize(500, 800);
@@ -66,7 +79,11 @@ public class GUI_ComplaintsList extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
-	
+
+	/**
+	 * Main method that calls constructor that makes the form.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		new GUI_ComplaintsList();
 	}
